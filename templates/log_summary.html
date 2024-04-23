@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Summary</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            max-height: 400px; /* Set a maximum height */
+            overflow-y: auto; /* Enable vertical scrolling when content exceeds max height */
+        }
+        .summary {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+        canvas {
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .log-link {
+            margin-top: 10px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            background-color: #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+        .log-link:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Log Summary</h1>
+        <h2>Log Lines</h2>
+        <pre>
+            {% for line in log_lines %}
+                {{ line }}
+            {% endfor %}
+        </pre>
+        
+        <div class="summary">
+            <h2>Summary</h2>
+            <p>Total Lines: {{ summary.total_lines }}</p>
+            <!-- <p>Error Count: {{ summary.error_count }}</p>
+            <p>Warning Count: {{ summary.warning_count }}</p> -->
+            {% for level, count in summary.log_level_counts.items() %}
+                <p><a class="log-link" href="/logs/{{ level }}">{{ level }} Count: {{ count }}</a></p>
+            {% endfor %}
+
+            <canvas id="logLevelChart"></canvas>
+            <script>
+                // Get log level counts from Flask route
+                // const logLevelCounts = {{summary.log_level_counts|tojson|safe }};
+                const logLevelCounts = JSON.parse('{{ summary.log_level_counts|tojson|safe }}');
+
+                // Extract data for chart
+                const labels = Object.keys(logLevelCounts);
+                const data = Object.values(logLevelCounts);
+
+                // Chart.js for log level counts
+                new Chart(document.getElementById("logLevelChart"), {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Log Level Counts',
+                            backgroundColor: ['#FF5733', '#FFC300', '#36A2EB', '#4CAF50', '#FF6384', '#9966FF', '#FF9800', '#8BC34A', '#9C27B0', '#607D8B'],
+                            borderWidth: 1,
+                            data: data
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</body>
+</html>
