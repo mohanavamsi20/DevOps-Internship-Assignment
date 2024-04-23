@@ -73,6 +73,33 @@ The application will be accessible at `http://localhost:5000/`.
 
 The application will start running on `http://127.0.0.1:5000/`.
 
+
+## Navigation
+
+1. **Home**: Landing page of the application displaying log summary and options for log analysis.
+   
+   ![Home](screenshots/Log_summary.png)
+   
+2. **Log Analysis**: Page to view logs filtered by log level.
+
+   ![Log Analysis](screenshots/stats.png)
+
+3. **Detailed Log Analysis**: Page to view detailed logs for a specific log level.
+
+   ![Detailed Log Analysis](screenshots/seperate_logs.png)
+
+
+## Log Monitor Using CMD
+
+You can view the Logs running random using tail command
+
+```
+tail -f app.log
+```
+![Log Views in CMD](screenshots/tail_view.png)
+
+
+
 ## File Structure
 
 - `app.py`: Flask application setup and routes.
