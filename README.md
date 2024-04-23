@@ -1,25 +1,20 @@
-# Flask Logging Application
+# Log Analysis and Monitoring Script
 
-This Flask application demonstrates logging functionality along with a monitoring interface to view log files.
+
+Objective: Create a script that automates the analysis and monitoring of log files
 
 ## Installation
 
 1. Clone this repository:
 
     ```
-    git clone <repository-url>
+    git clone https://github.com/mohanavamsi20/DevOps-Internship-Assignment.git
     ```
 
 2. Navigate to the project directory:
 
     ```
-    cd <project-directory>
-    ```
-
-3. Install the required dependencies:
-
-    ```
-    pip install -r requirements.txt
+    cd DevOps-Internship-Assignment
     ```
 
 ## Usage
@@ -84,7 +79,6 @@ The application will start running on `http://127.0.0.1:5000/`.
 - `logging_generation.py`: Script to generate random log messages.
 - `log_monitor.py`: Blueprint for monitoring routes.
 - `templates/`: HTML templates for rendering log and summary views.
-- `static/`: Static files such as CSS and JavaScript.
 
 ## Customization
 
@@ -94,7 +88,7 @@ You can customize the logging behavior, log file path, and log message templates
 
 - Flask: Web framework for Python.
 - Python 3.x: Programming language.
-
+- Docker (if available)
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
